@@ -8,11 +8,14 @@ all: moduleA
 	sudo ln -s /home/anymous/Practice/extern_test/lib/libmoduleA.so.1.10 /home/anymous/Practice/extern_test/lib/libmoduleA.so
 	gcc ./src/moduleB.cpp ./lib/libmoduleA.so -lstdc++ -I./inc -L./lib -o ./bin/a.out
 
-moduleA: 
+moduleA: outputdir
 	gcc -fPIC -shared ./src/moduleA.c -I./inc -o ./lib/libmoduleA.so.1.10 -Wl,-soname,libmoduleA.so.1
 
+outputdir:
+	mkdir -p ./lib ./bin
+
 clean:
-	rm -rf ./a.out ./*.so ./lib/* ./bin/*
+	rm -rf ./a.out ./*.so ./lib/ ./bin/
 
 # makefile:
 # -I : Specify the path of header files
