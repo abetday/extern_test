@@ -1,6 +1,6 @@
 .PHONY: all clean
 
-run: all
+run:
 	./bin/a.out
 
 all: moduleA
