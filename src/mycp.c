@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     
     if (argc < 3)
     {
-        printf("./mycp src dest.\n");
+        printf("Usage: ./mycp src dest.\n");
         exit(1);
     }
 

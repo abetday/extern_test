@@ -1,26 +1,31 @@
 .PHONY: all clean
 
 run:
-	$(info ==> Running...)
+	$(info ### Running...)
 # 运行前加'@', 运行"a.out"但不显示命令"./bin/a.out"
 	@./bin/a.out
 
 all: moduleA mycp
+	$(info ### make all)
 	sudo ldconfig
 	sudo ln -s /home/anymous/Practice/extern_test/lib/libmoduleA.so.1.10 /home/anymous/Practice/extern_test/lib/libmoduleA.so
 	gcc ./src/moduleB.cpp ./lib/libmoduleA.so -lstdc++ -I./inc -L./lib -o ./bin/a.out
 
 moduleA: outputdir
+	$(info ### make libmouduleA)
 	gcc -fPIC -shared ./src/moduleA.c -I./inc -o ./lib/libmoduleA.so.1.10 -Wl,-soname,libmoduleA.so.1
 
 # add app mycp
 mycp: 
+	$(info ### make mycp)
 	gcc ./src/mycp.c -o ./bin/mycp
 
 outputdir:
+	$(info ### create ./lib ./bin)
 	mkdir -p ./lib ./bin
 
 clean:
+	$(info ### make clean...)
 	rm -rf ./a.out ./*.so ./lib/ ./bin/
 
 # makefile:
