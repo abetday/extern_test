@@ -5,7 +5,7 @@ run:
 # 运行前加'@', 运行"a.out"但不显示命令"./bin/a.out"
 	@./bin/a.out
 
-all: moduleA mycp
+all: moduleA mycp version
 	$(info ### make all)
 	sudo ldconfig
 	sudo ln -s ${PWD}/lib/libmoduleA.so.1.10 ${PWD}/lib/libmoduleA.so
@@ -25,8 +25,8 @@ outputdir:
 	mkdir -p ./lib ./bin
 
 version:
-	@echo " Version: `git rev-parse HEAD`"
-	@echo " Branch : `git branch`"
+	@echo " char *version = \"`git rev-parse HEAD`\";" > ${PWD}/inc/version.h
+	@echo " char *branch  = \"`git symbolic-ref --short -q HEAD`\";" >> ${PWD}/inc/version.h
 
 clean:
 	$(info ### make clean...)
