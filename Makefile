@@ -8,7 +8,7 @@ run:
 all: moduleA mycp
 	$(info ### make all)
 	sudo ldconfig
-	sudo ln -s /home/anymous/Practice/extern_test/lib/libmoduleA.so.1.10 /home/anymous/Practice/extern_test/lib/libmoduleA.so
+	sudo ln -s ${PWD}/lib/libmoduleA.so.1.10 ${PWD}/lib/libmoduleA.so
 	gcc ./src/moduleB.cpp ./lib/libmoduleA.so -lstdc++ -I./inc -L./lib -o ./bin/a.out
 
 moduleA: outputdir
