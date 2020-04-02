@@ -24,6 +24,10 @@ outputdir:
 	$(info ### create ./lib ./bin)
 	mkdir -p ./lib ./bin
 
+version:
+	@echo " Version: `git rev-parse HEAD`"
+	@echo " Branch : `git branch`"
+
 clean:
 	$(info ### make clean...)
 	rm -rf ./a.out ./*.so ./lib/ ./bin/
