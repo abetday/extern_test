@@ -9,7 +9,7 @@ all: moduleA mycp version
 	$(info ### make all)
 	sudo ldconfig
 	sudo ln -s ${PWD}/lib/libmoduleA.so.1.10 ${PWD}/lib/libmoduleA.so
-	gcc ./src/moduleB.cpp ./lib/libmoduleA.so -lstdc++ -I./inc -L./lib -o ./bin/a.out
+	gcc ./src/moduleB.cpp -lmoduleA -lstdc++ -I./inc -L./lib -o ./bin/a.out
 
 moduleA: outputdir
 	$(info ### make libmouduleA)
