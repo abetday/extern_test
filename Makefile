@@ -25,8 +25,9 @@ outputdir:
 	mkdir -p ./lib ./bin
 
 version:
-	@echo " char *version = \"`git rev-parse HEAD`\";" > ${PWD}/inc/version.h
-	@echo " char *branch  = \"`git symbolic-ref --short -q HEAD`\";" >> ${PWD}/inc/version.h
+	$(info ### generate ./inc/version.h)
+	@echo "const char *version = \"`git rev-parse HEAD`\";" > ${PWD}/inc/version.h
+	@echo "const char *branch  = \"`git symbolic-ref --short -q HEAD`\";" >> ${PWD}/inc/version.h
 
 clean:
 	$(info ### make clean...)
