@@ -1,23 +1,23 @@
 .PHONY: all clean
 
-# name	   : 动态库的名字
-# major	   : 主版本号
-# minor	   : 子版本号
+# name     : 动态库的名字
+# major    : 主版本号
+# minor    : 子版本号
 # revision : 修正版本号
-name  = moduleA
-major = 1
-minor = 1
-revision = 0
+libA_name  = moduleA
+libA_major = 1
+libA_minor = 1
+libA_revision = 0
 
-LIB_LINK_NAME = lib$(name).so
-LIB_SO_NAME	  = lib$(name).so.$(major).$(minor)
-LIB_REAL_NAME = lib$(name).so.$(major).$(minor).$(revision)
+LIBA_LINK_NAME = lib$(libA_name).so
+LIBA_SO_NAME	  = lib$(libA_name).so.$(libA_major).$(libA_minor)
+LIBA_REAL_NAME = lib$(libA_name).so.$(libA_major).$(libA_minor).$(libA_revision)
 
-libname:
+libaname:
 	@echo "libmoduleA.so:"
-	@echo "	linkname: $(LIB_LINK_NAME)"
-	@echo "	soname	: $(LIB_SO_NAME)"
-	@echo "	realname: $(LIB_REAL_NAME)"
+	@echo "	linkname: $(LIBA_LINK_NAME)"
+	@echo "	soname	: $(LIBA_SO_NAME)"
+	@echo "	realname: $(LIBA_REAL_NAME)"
 
 run:
 	$(info ### Running...)
@@ -27,12 +27,12 @@ run:
 all: moduleA mycp version
 	$(info ### make all)
 	sudo ldconfig
-	sudo ln -s ${PWD}/lib/$(LIB_REAL_NAME) ${PWD}/lib/$(LIB_LINK_NAME)
-	gcc ./src/moduleB.cpp -lmoduleA -lstdc++ -I./inc -L./lib -o ./bin/a.out
+	sudo ln -s ${PWD}/lib/$(LIBA_REAL_NAME) ${PWD}/lib/$(LIBA_LINK_NAME)
+	gcc ./src/moduleB.cpp -l$(libA_name) -lstdc++ -I./inc -L./lib -o ./bin/a.out
 
-moduleA: outputdir libname
+moduleA: outputdir libaname
 	$(info ### make libmouduleA)
-	gcc -fPIC -shared ./src/moduleA.c -I./inc -o ./lib/$(LIB_REAL_NAME) -Wl,-soname,$(LIB_SO_NAME)
+	gcc -fPIC -shared ./src/moduleA.c -I./inc -o ./lib/$(LIBA_REAL_NAME) -Wl,-soname,$(LIBA_SO_NAME)
 
 # add app mycp
 mycp: 
